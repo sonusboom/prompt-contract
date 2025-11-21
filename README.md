@@ -5,8 +5,6 @@ I’m still very early in my python journey — but I care deeply about writing 
 
 So I built this **Master Prompt Contract** — a structured, enforceable set of instructions that transforms ChatGPT into a predictable, concise, senior-developer-styled coding assistant.
 
-It has completely changed how I use it
-
 ---
 
 ## 🌱 Why I Created This
