@@ -1,3 +1,7 @@
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![LLM Contract](https://img.shields.io/badge/Prompt%20Contract-Strict-orange.svg)
+![Status](https://img.shields.io/badge/Maintained-yes-blue.svg)
+
 # Prompt Contract
 
 This project came out of my own struggle to communicate clearly and consistently with ChatGPT while learning to code in Python. 
@@ -74,3 +78,5 @@ See the LICENSE file in this repository for full text.
 ## Contributions
 
 Pull requests and refinements are welcome — especially from those building tools, scripts, or frameworks around LLM reliability.
+
+**Keywords:** prompt engineering, llm prompt contract, ai coding standards, chatgpt ruleset, hallucination control, developer tools, ai code generation, llm specification, prompt rules, llm behavior contract.
