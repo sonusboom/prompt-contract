@@ -70,6 +70,8 @@ Instead of wading through noisy explanations or fixing oddly structured code, I 
 
 ## 📄 What’s Included
 
+The examples show what the code structure should resemble upon contract enforcement
+
 ```
 master_prompt_contract_v5.md   # Full Contract
 examples/
