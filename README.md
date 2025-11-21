@@ -92,8 +92,8 @@ README.md                      # You are here
 
 ## License
 
-MIT License (or your preference).  
-Add your license file to the repository root.
+MIT License  
+See the LICENSE file in this repository for full text.
 
 ---
 
