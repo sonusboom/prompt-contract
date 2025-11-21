@@ -1,4 +1,4 @@
-# Master Prompt Contract (v5)
+# Prompt Contract (v5)
 
 This project came out of my own struggle to communicate clearly and consistently with ChatGPT while learning to code in Python. 
 I’m still very early in my python journey — but I care deeply about writing clean, senior-developer-level code. ChatGPT has been a *massive* force multiplier for me, yet I kept running into the same problems: inconsistent output, unnecessary explanations, hallucinated details, and scripts that felt more “AI-generated” than “human-written.”
