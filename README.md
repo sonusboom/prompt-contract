@@ -59,8 +59,8 @@ README.md                      # You are here
 
 1. Open a new ChatGPT session.  
 2. Paste in the entire contents of `master_prompt_contract_v5.md`.  
-3. (Optional) Upload the file directly — ChatGPT will treat it as the authoritative baseline.  
-4. Start coding. Enjoy deterministic, clean, senior-dev-style output.
+3. (Optional) Upload the file directly.
+4. Confirm that ChatGPT or LLM of choice understands the contract and will enforce it.
 
 ---
 
