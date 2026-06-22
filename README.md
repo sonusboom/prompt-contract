@@ -246,32 +246,11 @@ The contract favors:
 
 ## Relationship to Language Guidelines
 
-Prompt Contract v6 defines how the assistant should behave.
+Prompt Contract v6 defines assistant behavior: how the assistant should plan, execute, patch, verify, and avoid scope drift.
 
-The example guideline files define what good output should look like for specific languages.
+The language guideline files are supporting examples that show what clean output should look like for Python, Bash, and PowerShell. They are not separate contracts and do not replace the main prompt contract.
 
-Python examples emphasize:
-
-* `snake_case`
-* focused functions
-* `argparse`
-* `main()` entrypoints
-
-Bash examples emphasize:
-
-* `set -euo pipefail`
-* short lowercase variables
-* simple functions
-* flag-based behavior instead of menus
-
-PowerShell examples emphasize:
-
-* approved verbs
-* typed parameters
-* structured output
-* clear `param()` blocks
-
-These examples are supporting guidance, not a replacement for the main contract.
+Use them when you want language-specific style expectations in addition to the core behavior rules.
 
 ---
 
