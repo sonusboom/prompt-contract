@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-06-22
+
+### Added
+
+* Added `checkpoint.md` as a standalone Claude workflow for preserving session decisions and development context.
+* Added `/checkpoint` workflow documentation to the README.
+* Documented the checkpoint output path: `docs/decisions/YYYY-MM-DD-<slug>.md`.
+* Documented the checkpoint workflow’s purpose: capturing decisions, incomplete implementations, findings, deferred work, and important notes that are not represented by the git log.
+
+### Changed
+
+* Updated README project structure to include `checkpoint.md`.
+* Clarified that Prompt Contract v6 defines assistant behavior, while `checkpoint.md` provides a session checkpoint workflow.
+
+### Notes
+
+* The checkpoint workflow requires a workspace with file-writing and git commit access.
+* The workflow is intended for meaningful development sessions, not routine summaries of every code change.
+
 ## [2.0.0] - 2026-06-22
 
 ### Changed
