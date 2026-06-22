@@ -19,16 +19,17 @@ Prompt Contract v6 moves the project from a ChatGPT-specific scripting contract 
 LLM coding assistants can be powerful, but they often drift in ways that create extra work:
 
 * implementing before understanding the request
-* inventing files, APIs, commands, or repo behavior
+* inventing files, APIs, commands, paths, or repo behavior
 * over-engineering simple changes
 * refactoring unrelated code
 * skipping verification
 * producing vague explanations instead of usable patches
 * treating planning, diagnosis, review, and implementation as the same task
+* losing important decisions when the session context gets compacted or reset
 
 Prompt Contract exists to reduce that friction.
 
-It gives the assistant a clear operating model: understand the task, respect the repo, keep changes scoped, verify what changed, and avoid unnecessary complexity.
+It gives the assistant a clear operating model: understand the task, respect the repo, keep changes scoped, verify what changed, and preserve important development context when needed.
 
 ---
 
@@ -89,6 +90,7 @@ If no mode is provided and the intent is ambiguous, the assistant should default
 
 ```text
 prompt_contract_v6.md          # Main LLM-assisted development contract
+checkpoint.md                  # Claude workflow for saving session decision checkpoints
 README.md                      # Project overview and usage
 CHANGELOG.md                   # Release history
 LICENSE                        # MIT License
@@ -99,7 +101,11 @@ examples/
   └── powershell_guidelines.md  # PowerShell style examples
 ```
 
-The language guideline files provide examples for Python, Bash, and PowerShell output style. The main contract defines assistant behavior across planning, execution, review, diagnosis, patching, and verification.
+The main contract defines assistant behavior across planning, execution, review, diagnosis, patching, and verification.
+
+The `checkpoint.md` file is a standalone Claude workflow for preserving important session context that should not be lost between development sessions.
+
+The language guideline files provide examples for Python, Bash, and PowerShell output style.
 
 ---
 
@@ -133,7 +139,89 @@ Review this script for maintainability and scope drift.
 
 For tools that support persistent project instructions, place the contract in the expected workspace instruction file or reference it from that file.
 
-For Claude Code-style workflows, a repo-level `CLAUDE.md` can be used to load these rules as workspace guidance.
+For Claude Code-style workflows, a repo-level instruction file can be used to load these rules as workspace guidance.
+
+The contract is most useful when paired with a real repository, because it tells the assistant to read repo facts instead of inventing them.
+
+---
+
+## Checkpoint Workflow
+
+`checkpoint.md` provides a standalone Claude workflow called `/checkpoint`.
+
+Use it at the end of a meaningful development session when important decisions, findings, incomplete work, or deferred items need to be preserved in the repository.
+
+This workflow captures context that the git log does not explain.
+
+The git history records what changed.
+
+The checkpoint records why decisions were made, what was discovered, what remains unfinished, and where future work should resume.
+
+### What It Captures
+
+The checkpoint workflow is intended to preserve:
+
+* architectural, design, or behavioral decisions
+* reasoning behind those decisions
+* alternatives that were considered or rejected
+* incomplete implementations and intended design
+* current pickup points for unfinished work
+* bug findings and root causes
+* consciously deferred work and why it was deferred
+* important notes that should survive context loss or session compaction
+
+It is not intended to summarize every code change.
+
+A short checkpoint with a few precise entries is better than a long vague summary.
+
+### How It Works
+
+When invoked, `/checkpoint` writes a Markdown file to:
+
+```text
+docs/decisions/YYYY-MM-DD-<slug>.md
+```
+
+The generated checkpoint includes only the sections that have useful content:
+
+```text
+Decisions
+Incomplete Implementations
+Findings
+Deferred Work
+Notes
+```
+
+After writing the checkpoint file, the workflow stages and commits it with a message like:
+
+```text
+docs: session checkpoint — <slug>
+```
+
+### When to Use It
+
+Use `/checkpoint` after sessions that include meaningful context worth preserving, such as:
+
+* choosing one design path over another
+* deciding not to implement something yet
+* stopping in the middle of an implementation
+* discovering the root cause of a bug
+* identifying a future pickup point in a specific file or function
+* documenting why a behavior, workflow, or architecture choice exists
+
+Do not use it for routine summaries of every small code change. The git log already covers that.
+
+### Requirements
+
+The checkpoint workflow assumes the assistant is operating in an environment that can:
+
+* read the current conversation
+* write files into the repository
+* create files under `docs/decisions/`
+* run `git add`
+* run `git commit`
+
+If you are only editing files through the GitHub website, you can still store `checkpoint.md` in the repo, but the workflow itself needs a Claude/code-agent workspace with file and git access to run automatically.
 
 ---
 
@@ -152,6 +240,7 @@ The contract favors:
 * maintainability over cleverness
 * direct answers over filler
 * planning before execution when intent is unclear
+* preserving important decisions before session context is lost
 
 ---
 
@@ -213,5 +302,6 @@ Good contributions should preserve the project’s core goals:
 * prefer practical rules over theory
 * do not add model-specific claims unless clearly documented
 * preserve the plan-first, low-drift development workflow
+* keep standalone workflows focused and purpose-built
 
-**Keywords:** prompt engineering, LLM-assisted development, AI coding assistant, prompt contract, Claude Code, ChatGPT, coding workflow, hallucination control, scope control, developer tools, AI code generation.
+**Keywords:** prompt engineering, LLM-assisted development, AI coding assistant, prompt contract, Claude Code, ChatGPT, coding workflow, hallucination control, scope control, checkpoint workflow, development notes, developer tools, AI code generation.
